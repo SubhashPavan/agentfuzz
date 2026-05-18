@@ -1,8 +1,8 @@
 # Blog post draft — "The failures that actually break AI agents"
 
-Target outlets, in order: your own site (pavansubhash.vercel.app), then
-cross-post to dev.to / Hashnode, then submit to thenextweb.com / TLDR
-newsletter / DataCouncil.
+Target outlets, in order: LinkedIn (long-form article), then cross-post to
+dev.to / Hashnode, then submit to thenextweb.com / TLDR newsletter /
+DataCouncil.
 
 ---
 
@@ -130,4 +130,4 @@ If you've run agents in production and you have a failure mode you've
 named privately but never seen in a public tool, I want to hear about
 it. File an issue. The fault catalog is the moat.
 
-— [Pavan Subhash Tirumalasetti](https://pavansubhash.vercel.app/)
+— [Pavan Subhash Tirumalasetti](https://www.linkedin.com/in/pavan-subhash-tirumalasetti)

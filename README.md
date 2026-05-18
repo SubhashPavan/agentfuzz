@@ -135,7 +135,7 @@ quiet, partial, half-degraded ones in the seams.
 
 This is the tool I wish I'd had.
 
-— [Pavan Subhash Tirumalasetti](https://pavansubhash.vercel.app/)
+— [Pavan Subhash Tirumalasetti](https://www.linkedin.com/in/pavan-subhash-tirumalasetti)
 
 ## License
 
