@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agentfuzz"
-version = "0.1.0"
+version = "0.2.0"
 description = "Chaos engineering for AI agents — inject realistic production failures (tool timeouts, malformed responses, cost spirals, prompt injection) and find out what breaks before your users do."
 readme = "README.md"
 requires-python = ">=3.10"

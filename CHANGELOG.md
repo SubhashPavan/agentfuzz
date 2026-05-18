@@ -6,6 +6,8 @@ All notable changes to this project are documented here. Format follows
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-05-18
+
 ### Added
 
 - **`AuthExpiry`** fault — returns 401 / 403 from a fraction of tool
@@ -20,6 +22,14 @@ All notable changes to this project are documented here. Format follows
 - `docs/roadmap.md` — public roadmap covering v0.2 framework expansion,
   v0.3 fault catalog, v0.4 reporting / scenarios, v0.5 production
   telemetry, v1.0 stability.
+- `docs/launch/seed-issues.md` — six pre-drafted GitHub issues covering
+  framework adapters (CrewAI, AutoGen), the next fault types, JUnit XML
+  output, deprecation cleanup, and a real-LLM examples gallery.
+
+### Internal
+
+- 7 new tests covering the new faults; full suite now at 21 tests, all
+  green across Python 3.10 / 3.11 / 3.12 / 3.13.
 
 ## [0.1.0] — 2026-05-18
 
@@ -49,5 +59,6 @@ All notable changes to this project are documented here. Format follows
 - **CI** — ruff lint + format check on 3.12; pytest on 3.10 / 3.11 / 3.12 /
   3.13 (Ubuntu) plus 3.12 smoke runs on Windows and macOS.
 
-[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.2.0
 [0.1.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.1.0
