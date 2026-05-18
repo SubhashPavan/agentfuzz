@@ -54,9 +54,9 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           cache: pip
-      - name: Install (core + langgraph + crewai + dev)
+      - name: Install (core + all framework extras + dev)
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[langgraph,crewai,dev]"
+          pip install -e ".[langgraph,crewai,autogen,dev]"
       - name: Run tests
         run: pytest -ra --cov=agentfuzz --cov-report=term-missing

@@ -15,8 +15,11 @@ most teams ship today.
       `CrewAIAdapter(crew)` for harness integration. wrap_tools path
       tested; full-crew integration test (deterministic fake LLM inside
       CrewAI's LiteLLM layer) is a v0.3.x follow-up.
-- [ ] AutoGen v0.4+ adapter — wrap `FunctionTool` instances, support the
-      async invocation pattern
+- [x] AutoGen v0.4+ adapter — wrap `FunctionTool` instances via async
+      proxy (contextvar-safe); `AutoGenAdapter(agent)` for any
+      AssistantAgent / Team exposing async `run(task=...)`. Full
+      agent-loop integration test (deterministic fake model client) is
+      a v0.3.x follow-up.
 - [ ] PydanticAI adapter — `Tool` wrapping + `Agent.run()` integration
 - [x] LangChain `create_agent` (1.x) — verified the existing
       `LangGraphAdapter` works on `langchain.agents.create_agent` output,

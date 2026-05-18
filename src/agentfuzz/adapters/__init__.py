@@ -13,11 +13,13 @@ adapter only knows how to drive its framework's particular call shape.
 from agentfuzz.adapters.callable import CallableAdapter
 
 # Framework adapters are imported lazily so importing this package doesn't
-# pull langchain_core / crewai / etc. until the user actually uses them.
+# pull langchain_core / crewai / autogen until the user actually uses them.
 __all__ = [
+    "AutoGenAdapter",
     "CallableAdapter",
     "CrewAIAdapter",
     "LangGraphAdapter",
+    "wrap_autogen_tools",
     "wrap_crewai_tools",
     "wrap_tools",
 ]
@@ -36,4 +38,12 @@ def __getattr__(name: str):
         from agentfuzz.adapters import crewai as _crewai
 
         return _crewai.wrap_tools
+    if name == "AutoGenAdapter":
+        from agentfuzz.adapters import autogen as _autogen
+
+        return _autogen.AutoGenAdapter
+    if name == "wrap_autogen_tools":
+        from agentfuzz.adapters import autogen as _autogen
+
+        return _autogen.wrap_tools
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

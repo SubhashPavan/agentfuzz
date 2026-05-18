@@ -119,8 +119,9 @@ More planned — [see the roadmap](docs/roadmap.md).
 - ✅ **LangChain `create_agent` (1.x)** — `agentfuzz[langgraph]`. The modern entry point. Wrap your tools with `wrap_tools()`, point `LangGraphAdapter` at the compiled graph.
 - ✅ **LangGraph `create_react_agent` (0.x)** — same adapter; both APIs return a `CompiledStateGraph` we handle uniformly. See [`examples/langgraph_react_agent.py`](examples/langgraph_react_agent.py).
 - ✅ **CrewAI** — `agentfuzz[crewai]`. `wrap_tools()` returns proxy `crewai.tools.BaseTool` instances; `CrewAIAdapter(crew)` drives the harness through `crew.kickoff()`. See [`examples/crewai_agent.py`](examples/crewai_agent.py).
+- ✅ **AutoGen v0.4+** — `agentfuzz[autogen]`. `wrap_tools()` returns proxy `autogen_core.tools.FunctionTool` instances; `AutoGenAdapter(agent)` drives any agent / team exposing async `run(task=...)`. See [`examples/autogen_agent.py`](examples/autogen_agent.py).
 - ✅ **Plain Python callables** — any `Callable[[State], State]`. Simplest way to try the tool.
-- 🚧 AutoGen, PydanticAI, OpenAI Swarm, LlamaIndex — coming.
+- 🚧 PydanticAI, OpenAI Swarm, LlamaIndex — coming.
 
 The adapter interface is small (`is_available()` + `wrap()`); PRs welcome.
 

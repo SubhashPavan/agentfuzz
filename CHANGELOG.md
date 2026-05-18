@@ -6,6 +6,26 @@ All notable changes to this project are documented here. Format follows
 
 ## [Unreleased]
 
+### Added
+
+- **AutoGen v0.4+ adapter** (`agentfuzz[autogen]`) — `wrap_tools()` returns
+  proxy `autogen_core.tools.FunctionTool` instances built around an async
+  wrapper preserving the original function's typed signature (via
+  `functools.wraps`, which AutoGen's `inspect.signature(..., follow_wrapped=True)`
+  honors). `AutoGenAdapter(agent)` drives any agent or team exposing
+  async `run(task=...)`. Sync underlying tools are invoked from the
+  async proxy so the fault `contextvar` stays bound — AutoGen's normal
+  `run_in_executor` path for sync tools would break that.
+- Example: `examples/autogen_agent.py` — wrap_tools path runs without
+  API keys; full AssistantAgent demo activates when `OPENAI_API_KEY` is
+  set.
+- CI installs the `autogen` extra alongside `langgraph` and `crewai`.
+
+### Internal
+
+- 6 new AutoGen tests; full suite now at 32 tests across all framework
+  adapters.
+
 ## [0.3.0] — 2026-05-18
 
 ### Added
