@@ -6,6 +6,23 @@ All notable changes to this project are documented here. Format follows
 
 ## [Unreleased]
 
+### Added
+
+- **CrewAI adapter** (`agentfuzz[crewai]`) — `wrap_tools()` returns proxy
+  `crewai.tools.BaseTool` instances that route invocations through the
+  fault chain; `CrewAIAdapter(crew)` drives a `Crew` from the harness via
+  `crew.kickoff()`. Supports sync and async tools. The full crew-loop
+  integration test (deterministic fake LLM inside CrewAI's LiteLLM layer)
+  is a v0.3.x follow-up.
+- Example: `examples/crewai_agent.py` — runs the wrap_tools path without
+  API keys, plus a full-crew demo that activates when `OPENAI_API_KEY` is
+  set.
+- Verified `LangGraphAdapter` works on `langchain.agents.create_agent`
+  (LangChain 1.x). Tests and example migrated off the deprecated
+  `langgraph.prebuilt.create_react_agent` import — the `LangGraphDeprecatedSinceV10`
+  warning is now silent.
+- CI installs `crewai` extra so CrewAI tests run on every push.
+
 ## [0.2.0] — 2026-05-18
 
 ### Added

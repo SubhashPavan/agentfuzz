@@ -12,9 +12,15 @@ adapter only knows how to drive its framework's particular call shape.
 
 from agentfuzz.adapters.callable import CallableAdapter
 
-# LangGraphAdapter is imported lazily to avoid pulling langchain_core at
-# import time when the user hasn't installed the optional extra.
-__all__ = ["CallableAdapter", "LangGraphAdapter", "wrap_tools"]
+# Framework adapters are imported lazily so importing this package doesn't
+# pull langchain_core / crewai / etc. until the user actually uses them.
+__all__ = [
+    "CallableAdapter",
+    "CrewAIAdapter",
+    "LangGraphAdapter",
+    "wrap_crewai_tools",
+    "wrap_tools",
+]
 
 
 def __getattr__(name: str):
@@ -22,4 +28,12 @@ def __getattr__(name: str):
         from agentfuzz.adapters import langgraph as _lg
 
         return getattr(_lg, name)
+    if name == "CrewAIAdapter":
+        from agentfuzz.adapters import crewai as _crewai
+
+        return _crewai.CrewAIAdapter
+    if name == "wrap_crewai_tools":
+        from agentfuzz.adapters import crewai as _crewai
+
+        return _crewai.wrap_tools
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

@@ -11,8 +11,10 @@ most teams ship today.
 
 - [x] LangGraph adapter (sync + async tool wrapping via `wrap_tools`)
 - [x] AuthExpiry, NetworkPartition, PromptParaphrase faults
-- [ ] CrewAI adapter — `wrap_tools()` over `crewai.tools.BaseTool`,
-      `CrewAIAdapter(crew)` for harness integration
+- [x] CrewAI adapter — `wrap_tools()` over `crewai.tools.BaseTool`,
+      `CrewAIAdapter(crew)` for harness integration. wrap_tools path
+      tested; full-crew integration test (deterministic fake LLM inside
+      CrewAI's LiteLLM layer) is a v0.3.x follow-up.
 - [ ] AutoGen v0.4+ adapter — wrap `FunctionTool` instances, support the
       async invocation pattern
 - [ ] PydanticAI adapter — `Tool` wrapping + `Agent.run()` integration
