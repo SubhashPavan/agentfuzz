@@ -1,0 +1,38 @@
+# Changelog
+
+All notable changes to this project are documented here. Format follows
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project follows
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.1.0] — 2026-05-18
+
+### Added
+
+- **Harness** — drive an agent through fault-injected iterations with
+  deterministic seeding, per-iteration `FaultContext`, scenario fixtures,
+  and a `HarnessResult` with `summary()` / `json()` / `html()` exports.
+- **Fault library (8):** `ToolTimeout`, `MalformedToolResponse` (six
+  corruption modes), `PartialToolFailure`, `LatencyJitter`, `CostSpiral`
+  (observer — tags infinite loops and token-budget blow-ups),
+  `PromptInjection` (bundled OWASP LLM01 catalog with canary-phrase leak
+  detection), `RateLimitBurst` (cascading 429 windows), and `SchemaDrift`
+  (field renames and envelope wrapping).
+- **LangGraph adapter** — `wrap_tools()` returns drop-in `StructuredTool`
+  replacements that route through the fault chain; `LangGraphAdapter(graph)`
+  drives a compiled graph from the harness using a contextvar-based runtime.
+  Sync and async tools both supported.
+- **Callable adapter** — for plain Python agent functions, no framework
+  required.
+- **HTML report** — styled output with stat cards, failures-by-fault,
+  failures-by-tag, and a per-iteration table.
+- **CLI** (`agentfuzz`) — `demo`, `faults`, `scenarios` subcommands.
+- **Tests** — 14 covering harness lifecycle, determinism, every fault
+  category, HTML/JSON rendering, and full LangGraph ReAct integration via a
+  scripted fake chat model.
+- **CI** — ruff lint + format check on 3.12; pytest on 3.10 / 3.11 / 3.12 /
+  3.13 (Ubuntu) plus 3.12 smoke runs on Windows and macOS.
+
+[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.1.0
