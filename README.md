@@ -96,7 +96,7 @@ print(result.summary())
 # >>>     - 3× infinite loop killed at max_tokens
 ```
 
-## Fault library (v0.1)
+## Fault library
 
 | Fault | What it simulates |
 |---|---|
@@ -106,8 +106,11 @@ print(result.summary())
 | `LatencyJitter` | Realistic p50 / p99 latency distribution |
 | `CostSpiral` | Detects runaway token usage above a threshold |
 | `PromptInjection` | OWASP LLM01 catalog of injection payloads |
+| `PromptParaphrase` | Real users mangle messages — typos, filler, contractions |
 | `RateLimitBurst` | Cascading 429s from upstream APIs |
 | `SchemaDrift` | Tool API changed shape between dev and prod |
+| `AuthExpiry` | 401 / 403 — tests credential-refresh paths |
+| `NetworkPartition` | Connection refused / TLS error — distinct from timeout |
 
 More planned — [see the roadmap](docs/roadmap.md).
 

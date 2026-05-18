@@ -6,6 +6,21 @@ All notable changes to this project are documented here. Format follows
 
 ## [Unreleased]
 
+### Added
+
+- **`AuthExpiry`** fault — returns 401 / 403 from a fraction of tool
+  calls. Surfaces agents that lack a credential-refresh path.
+- **`NetworkPartition`** fault — simulates transport-layer failure
+  (connection refused / TLS error). Distinct from `ToolTimeout`, which
+  returns a delayed envelope. Raises `ConnectionError` by default; pass
+  `as_result=True` for an error-envelope shape.
+- **`PromptParaphrase`** fault — mutates user prompts the way real users
+  do: typos, casual prefixes / suffixes, contractions. Template-driven, no
+  LLM dependency.
+- `docs/roadmap.md` — public roadmap covering v0.2 framework expansion,
+  v0.3 fault catalog, v0.4 reporting / scenarios, v0.5 production
+  telemetry, v1.0 stability.
+
 ## [0.1.0] — 2026-05-18
 
 ### Added
