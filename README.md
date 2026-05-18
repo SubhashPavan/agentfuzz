@@ -116,7 +116,8 @@ More planned — [see the roadmap](docs/roadmap.md).
 
 ## Supported agent frameworks
 
-- ✅ **LangGraph** (`agentfuzz[langgraph]`) — wrap your tools with `wrap_tools()`, point a `LangGraphAdapter` at your compiled graph, done. See [`examples/langgraph_react_agent.py`](examples/langgraph_react_agent.py).
+- ✅ **LangChain `create_agent` (1.x)** — `agentfuzz[langgraph]`. The modern entry point. Wrap your tools with `wrap_tools()`, point `LangGraphAdapter` at the compiled graph.
+- ✅ **LangGraph `create_react_agent` (0.x)** — same adapter; both APIs return a `CompiledStateGraph` we handle uniformly. See [`examples/langgraph_react_agent.py`](examples/langgraph_react_agent.py).
 - ✅ **Plain Python callables** — any `Callable[[State], State]`. Simplest way to try the tool.
 - 🚧 CrewAI, AutoGen, PydanticAI, OpenAI Swarm, LlamaIndex — coming.
 

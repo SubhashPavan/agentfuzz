@@ -1,7 +1,12 @@
 """LangGraph adapter tests.
 
-These tests exercise the adapter against a real LangGraph runtime, using a
-deterministic fake chat model so they don't need network or API keys."""
+These tests exercise the adapter against a real LangGraph runtime using a
+deterministic fake chat model — no network, no API keys.
+
+The agent is built via `langchain.agents.create_agent` (LangChain 1.x), which
+returns a `CompiledStateGraph` — the same type `langgraph.prebuilt.create_react_agent`
+returns on the older API. The `LangGraphAdapter` works for both call sites
+because it only touches the compiled-graph contract."""
 
 from __future__ import annotations
 
@@ -9,11 +14,12 @@ import pytest
 
 pytest.importorskip("langgraph")
 pytest.importorskip("langchain_core")
+pytest.importorskip("langchain")
 
+from langchain.agents import create_agent
 from langchain_core.language_models.fake_chat_models import GenericFakeChatModel
 from langchain_core.messages import AIMessage
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
 
 from agentfuzz import Harness, faults
 from agentfuzz.adapters.langgraph import LangGraphAdapter, wrap_tools
@@ -95,7 +101,7 @@ def _fake_react_agent() -> object:
     """
     model = _ToolCallingFakeModel(messages=iter(_scripted_messages()))
     fuzzed = wrap_tools([lookup_order])
-    return create_react_agent(model, tools=fuzzed)
+    return create_agent(model, tools=fuzzed)
 
 
 def test_full_harness_run_against_langgraph_react_agent() -> None:

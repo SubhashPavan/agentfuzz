@@ -1,4 +1,4 @@
-"""A LangGraph ReAct agent under fault injection.
+"""A LangChain / LangGraph ReAct agent under fault injection.
 
 This example uses a *deterministic fake model* so you can run it without any
 API key. The fake model is scripted to: (1) emit a tool call, then (2) emit a
@@ -6,20 +6,26 @@ final answer. The interesting part isn't the model — it's that the
 fault-injected `lookup_order` tool sometimes returns timeouts, malformed
 responses, or corrupted shapes, and we observe how the ReAct loop reacts.
 
+The agent is built with `langchain.agents.create_agent` (LangChain 1.x). The
+same code works with `langgraph.prebuilt.create_react_agent` for users on
+LangGraph 0.x — both return a CompiledStateGraph that LangGraphAdapter
+handles uniformly.
+
 To run against a real model (OpenAI / Anthropic / Azure / Bedrock), swap the
 `_FakeChat` instantiation for any tool-calling chat model.
 
 Run:
     python examples/langgraph_react_agent.py
 """
+
 from __future__ import annotations
 
 from pathlib import Path
 
+from langchain.agents import create_agent
 from langchain_core.language_models.fake_chat_models import GenericFakeChatModel
 from langchain_core.messages import AIMessage
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
 
 from agentfuzz import Harness, faults
 from agentfuzz.adapters.langgraph import LangGraphAdapter, wrap_tools
@@ -56,7 +62,7 @@ def main() -> None:
     # would otherwise be drained.
     def build_graph() -> object:
         model = _FakeChat(messages=iter(_scripted_round()))
-        return create_react_agent(model, tools=wrap_tools([lookup_order]))
+        return create_agent(model, tools=wrap_tools([lookup_order]))
 
     # The harness will re-invoke `agent` for each iteration. We close over
     # `build_graph` to make a fresh graph + fresh scripted-message iterator

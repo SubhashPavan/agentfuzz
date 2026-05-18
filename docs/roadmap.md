@@ -16,11 +16,13 @@ most teams ship today.
 - [ ] AutoGen v0.4+ adapter — wrap `FunctionTool` instances, support the
       async invocation pattern
 - [ ] PydanticAI adapter — `Tool` wrapping + `Agent.run()` integration
-- [ ] LangChain classic `AgentExecutor` adapter — for users still on the
-      pre-LangGraph stack
-- [ ] Switch the LangGraph tests off of the deprecated
+- [x] LangChain `create_agent` (1.x) — verified the existing
+      `LangGraphAdapter` works on `langchain.agents.create_agent` output,
+      which is a `CompiledStateGraph`. No new adapter needed; the readme
+      and example now show both call sites.
+- [x] Switch the LangGraph tests off of the deprecated
       `langgraph.prebuilt.create_react_agent` to
-      `langchain.agents.create_agent` once it's stable
+      `langchain.agents.create_agent`.
 
 ## v0.3 — Fault catalog expansion
 

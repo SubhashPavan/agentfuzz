@@ -1,5 +1,14 @@
 """LangGraph adapter.
 
+Despite the name, this single adapter covers **both** call sites:
+
+  * `langgraph.prebuilt.create_react_agent(...)` — the older API
+  * `langchain.agents.create_agent(...)` — LangChain 1.x / the modern API
+  * Hand-built `StateGraph` instances you've compiled yourself
+
+All three return a `CompiledStateGraph`; `LangGraphAdapter` only touches the
+compiled-graph contract.
+
 Design
 ------
 LangGraph doesn't give us a state hook at tool invocation time, so we use a
@@ -9,28 +18,35 @@ between the harness and tool wrappers. Three pieces:
   * `wrap_tools(tools)` returns a list of LangChain `BaseTool` instances that
     proxy through the agentfuzz fault chain. Users build their graph with
     these instead of the originals — they have the same name, schema, and
-    description, so `create_react_agent` / `ToolNode` accept them unchanged.
+    description, so `create_agent` / `create_react_agent` / `ToolNode`
+    accept them unchanged.
 
-  * `LangGraphAdapter(graph)` adapts a compiled LangGraph runnable to the
-    harness's `AgentCallable` interface. It sets the contextvar on entry,
-    invokes the graph, records the final message text, and unbinds on exit.
+  * `LangGraphAdapter(graph)` adapts a compiled runnable to the harness's
+    `AgentCallable` interface. It sets the contextvar on entry, invokes
+    the graph, records the final message text, and unbinds on exit.
 
   * Async tools are supported transparently — the proxy's `_arun` routes
     through `ainvoke` on the underlying tool when available.
 
-Usage
------
-    from langgraph.prebuilt import create_react_agent
+Usage (LangChain 1.x — recommended)
+-----------------------------------
+    from langchain.agents import create_agent
     from agentfuzz import Harness, faults
     from agentfuzz.adapters.langgraph import LangGraphAdapter, wrap_tools
 
     fuzzed = wrap_tools([search, lookup_order])
-    graph = create_react_agent(model, tools=fuzzed)
+    graph = create_agent(model, tools=fuzzed)
 
     wrapped = LangGraphAdapter(graph).wrap()
     harness = Harness(wrapped, scenarios=[{"prompt": "..."}])
     harness.add(faults.ToolTimeout(rate=0.2))
     result = harness.run(iterations=50)
+
+Usage (LangGraph 0.x — legacy)
+------------------------------
+    from langgraph.prebuilt import create_react_agent
+    graph = create_react_agent(model, tools=wrap_tools([search, lookup_order]))
+    # …rest identical.
 """
 
 from __future__ import annotations
