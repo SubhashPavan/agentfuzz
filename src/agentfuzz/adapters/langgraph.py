@@ -36,5 +36,5 @@ class LangGraphAdapter(Adapter):
     def wrap(self, agent: Any, *, faults: Sequence[Fault]) -> AgentCallable:
         raise NotImplementedError(
             "LangGraphAdapter is a v0.2 target. Track progress: "
-            "https://github.com/pavansubhash/agentfuzz/issues/1"
+            "https://github.com/SubhashPavan/agentfuzz/issues/1"
         )

@@ -153,6 +153,6 @@ If you use `agentfuzz` in research or production reports:
   author  = {Tirumalasetti, Pavan Subhash},
   title   = {agentfuzz: Chaos engineering for AI agents},
   year    = {2026},
-  url     = {https://github.com/pavansubhash/agentfuzz},
+  url     = {https://github.com/SubhashPavan/agentfuzz},
 }
 ```

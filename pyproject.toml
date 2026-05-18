@@ -63,10 +63,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/pavansubhash/agentfuzz"
-Documentation = "https://github.com/pavansubhash/agentfuzz#readme"
-Repository = "https://github.com/pavansubhash/agentfuzz"
-Issues = "https://github.com/pavansubhash/agentfuzz/issues"
+Homepage = "https://github.com/SubhashPavan/agentfuzz"
+Documentation = "https://github.com/SubhashPavan/agentfuzz#readme"
+Repository = "https://github.com/SubhashPavan/agentfuzz"
+Issues = "https://github.com/SubhashPavan/agentfuzz/issues"
 
 [project.scripts]
 agentfuzz = "agentfuzz.cli:app"
