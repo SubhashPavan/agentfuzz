@@ -6,6 +6,8 @@ All notable changes to this project are documented here. Format follows
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-05-18
+
 ### Added
 
 - **CrewAI adapter** (`agentfuzz[crewai]`) — `wrap_tools()` returns proxy
@@ -14,14 +16,20 @@ All notable changes to this project are documented here. Format follows
   `crew.kickoff()`. Supports sync and async tools. The full crew-loop
   integration test (deterministic fake LLM inside CrewAI's LiteLLM layer)
   is a v0.3.x follow-up.
+- **LangChain 1.x coverage** — verified the existing `LangGraphAdapter`
+  works on `langchain.agents.create_agent` output (it's a
+  `CompiledStateGraph`, same type that `langgraph.prebuilt.create_react_agent`
+  returns). No new adapter code; tests + example migrated off the
+  deprecated import and the `LangGraphDeprecatedSinceV10` warning we'd
+  been carrying is now silent.
 - Example: `examples/crewai_agent.py` — runs the wrap_tools path without
   API keys, plus a full-crew demo that activates when `OPENAI_API_KEY` is
   set.
-- Verified `LangGraphAdapter` works on `langchain.agents.create_agent`
-  (LangChain 1.x). Tests and example migrated off the deprecated
-  `langgraph.prebuilt.create_react_agent` import — the `LangGraphDeprecatedSinceV10`
-  warning is now silent.
-- CI installs `crewai` extra so CrewAI tests run on every push.
+
+### Internal
+
+- 5 new CrewAI tests; full suite now at 26 tests, all green.
+- CI installs the `crewai` extra so CrewAI tests run on every push.
 
 ## [0.2.0] — 2026-05-18
 
@@ -76,6 +84,7 @@ All notable changes to this project are documented here. Format follows
 - **CI** — ruff lint + format check on 3.12; pytest on 3.10 / 3.11 / 3.12 /
   3.13 (Ubuntu) plus 3.12 smoke runs on Windows and macOS.
 
-[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.3.0
 [0.2.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.2.0
 [0.1.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.1.0

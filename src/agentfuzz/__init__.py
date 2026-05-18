@@ -6,7 +6,7 @@ from agentfuzz.core.fault import Fault, FaultOutcome
 from agentfuzz.core.harness import Harness
 from agentfuzz.core.result import HarnessResult, IterationResult
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 __all__ = [
     "Fault",
