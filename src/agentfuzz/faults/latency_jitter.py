@@ -46,10 +46,7 @@ class LatencyJitter(Fault):
         # 99th percentile lands on p99; rest follows a triangular distribution
         # weighted toward p50.
         u = ctx.rng.random()
-        if u > 0.99:
-            extra = self.p99_ms
-        else:
-            extra = ctx.rng.triangular(0.0, self.p99_ms, self.p50_ms)
+        extra = self.p99_ms if u > 0.99 else ctx.rng.triangular(0.0, self.p99_ms, self.p50_ms)
         if self.actually_sleep:
             time.sleep(extra / 1000.0)
         new = ToolResult(

@@ -7,7 +7,7 @@ from random import Random
 from typing import Any
 
 from agentfuzz.core.context import FaultContext, ToolCall, ToolResult
-from agentfuzz.core.fault import Fault, FaultDecision, FaultOutcome
+from agentfuzz.core.fault import Fault, FaultOutcome
 from agentfuzz.core.result import HarnessResult, IterationResult
 
 # An agent is anything callable that takes a state dict (with at least a
@@ -86,9 +86,7 @@ class Harness:
 
         return HarnessResult(iterations=results, fault_names=[f.name for f in self._faults])
 
-    def _run_one(
-        self, iteration: int, seed: int, scenario: dict[str, Any]
-    ) -> IterationResult:
+    def _run_one(self, iteration: int, seed: int, scenario: dict[str, Any]) -> IterationResult:
         ctx = FaultContext(iteration=iteration, seed=seed)
         for f in self._faults:
             f.on_iteration_start(ctx)

@@ -1,0 +1,51 @@
+name: Bug report
+description: Something is broken or behaves unexpectedly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: A clear description of the bug. What did you expect, what did you see?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Smallest snippet of code (or CLI commands) that triggers the bug.
+      render: python
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: agentfuzz version
+      description: Output of `pip show agentfuzz` (Version line).
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.12.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework
+      options:
+        - "None / plain callable"
+        - "LangGraph"
+        - "CrewAI"
+        - "AutoGen"
+        - "Other"
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: OS / environment
+      description: OS, container, anything else relevant.

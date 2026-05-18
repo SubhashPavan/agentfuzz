@@ -4,6 +4,7 @@ For v0.1 the CLI is intentionally small: list faults, list scenario suites,
 and run the bundled smoke example. Users instrument their real agents via
 the Python API. v0.2 will add `agentfuzz run path/to/config.toml`.
 """
+
 from __future__ import annotations
 
 from typing import Annotated
@@ -67,7 +68,11 @@ def demo(
         result = call_tool("search", query=state.get("prompt", ""))  # type: ignore[operator]
         # An agent built against a contract — fails when the contract is violated.
         if not isinstance(result, dict):
-            return {**state, "error": f"expected dict, got {type(result).__name__}", "token_usage": 240}
+            return {
+                **state,
+                "error": f"expected dict, got {type(result).__name__}",
+                "token_usage": 240,
+            }
         if "n" not in result or "results" not in result:
             return {**state, "error": "missing required fields", "token_usage": 240}
         return {**state, "answer": f"found {result['n']} hits", "token_usage": 240}

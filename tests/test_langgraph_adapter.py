@@ -2,6 +2,7 @@
 
 These tests exercise the adapter against a real LangGraph runtime, using a
 deterministic fake chat model so they don't need network or API keys."""
+
 from __future__ import annotations
 
 import pytest
@@ -57,7 +58,7 @@ def test_malformed_response_corrupts_langgraph_tool_results() -> None:
     malformed = faults.MalformedToolResponse(rate=1.0)
     malformed.on_iteration_start(ctx)
     with active_run(ctx, [malformed]):
-        result = fuzzed.invoke({"order_id": "abc"})
+        fuzzed.invoke({"order_id": "abc"})
     # Some corruption mode applied — either the dict is mutated or the result
     # is a string / wrapped envelope, depending on the random mode.
     triggered = any(
@@ -80,9 +81,7 @@ def _scripted_messages() -> list[AIMessage]:
     return [
         AIMessage(
             content="",
-            tool_calls=[
-                {"name": "lookup_order", "args": {"order_id": "44892"}, "id": "call_1"}
-            ],
+            tool_calls=[{"name": "lookup_order", "args": {"order_id": "44892"}, "id": "call_1"}],
         ),
         AIMessage(content="Order 44892 is shipped."),
     ]

@@ -4,6 +4,7 @@ For v0.1 we ship a tiny built-in scenario set. v0.2 will add loaders for
 tau-bench (Sierra) and WorkArena (ServiceNow) so users can run their agents
 against well-known benchmarks under fault injection.
 """
+
 from __future__ import annotations
 
 from typing import Any
@@ -25,9 +26,7 @@ _BUILTIN: dict[str, list[dict[str, Any]]] = {
 
 def load_scenarios(name: str) -> list[dict[str, Any]]:
     if name not in _BUILTIN:
-        raise KeyError(
-            f"unknown scenario suite {name!r}; available: {sorted(_BUILTIN)}"
-        )
+        raise KeyError(f"unknown scenario suite {name!r}; available: {sorted(_BUILTIN)}")
     return [dict(s) for s in _BUILTIN[name]]
 
 

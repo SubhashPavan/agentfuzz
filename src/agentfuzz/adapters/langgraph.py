@@ -32,6 +32,7 @@ Usage
     harness.add(faults.ToolTimeout(rate=0.2))
     result = harness.run(iterations=50)
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -78,8 +79,8 @@ class LangGraphAdapter(Adapter):
     @classmethod
     def is_available(cls) -> bool:
         try:
-            import langgraph  # noqa: F401
             import langchain_core  # noqa: F401
+            import langgraph  # noqa: F401
         except ImportError:
             return False
         return True
@@ -174,9 +175,7 @@ def _build_fuzzed_subclass(underlying: Any) -> Any:
     )
 
 
-def _invoke_fuzzed(
-    underlying: Any, args: tuple[Any, ...], kwargs: dict[str, Any]
-) -> Any:
+def _invoke_fuzzed(underlying: Any, args: tuple[Any, ...], kwargs: dict[str, Any]) -> Any:
     ctx = current_ctx()
     faults = current_faults()
     invoke_input = _compose_invoke_input(args, kwargs)

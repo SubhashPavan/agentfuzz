@@ -8,6 +8,7 @@ Wrapped tools read from these vars at call time.
 `contextvars` propagates correctly across both sync and asyncio boundaries —
 each iteration runs in its own context so concurrent iterations stay isolated.
 """
+
 from __future__ import annotations
 
 import contextvars

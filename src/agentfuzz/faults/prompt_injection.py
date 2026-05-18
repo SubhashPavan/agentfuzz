@@ -60,9 +60,7 @@ class PromptInjection(Fault):
             raise ValueError(f"target must be 'prompt' or 'tool_result', got {target!r}")
         if payloads is None:
             if suite is None or suite not in _SUITES:
-                raise ValueError(
-                    f"unknown suite {suite!r}; available: {sorted(_SUITES)}"
-                )
+                raise ValueError(f"unknown suite {suite!r}; available: {sorted(_SUITES)}")
             payloads = _SUITES[suite]
         if not 0.0 <= rate <= 1.0:
             raise ValueError(f"rate must be in [0,1], got {rate}")
@@ -112,7 +110,9 @@ class PromptInjection(Fault):
         )
         ctx.record("injection_attempted", fault=self.name, target="tool_result")
         return FaultDecision(
-            outcome=__import__("agentfuzz.core.fault", fromlist=["FaultOutcome"]).FaultOutcome.MUTATED,
+            outcome=__import__(
+                "agentfuzz.core.fault", fromlist=["FaultOutcome"]
+            ).FaultOutcome.MUTATED,
             mutated_result=new,
             reason="indirect injection via tool result",
         )

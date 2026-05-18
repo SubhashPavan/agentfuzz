@@ -78,10 +78,10 @@ def _kv_table(title_left: str, title_right: str, items: dict[str, int]) -> str:
     rows = []
     for k, v in sorted(items.items(), key=lambda kv: -kv[1]):
         pct = v / total
+        key = html.escape(k)
         rows.append(
-            "<tr><td>{k}</td><td>{v}</td><td><div class='bar'><i style='width:{w:.0%}'></i></div></td></tr>".format(
-                k=html.escape(k), v=v, w=pct
-            )
+            f"<tr><td>{key}</td><td>{v}</td>"
+            f"<td><div class='bar'><i style='width:{pct:.0%}'></i></div></td></tr>"
         )
     return (
         f"<table><thead><tr><th>{title_left}</th><th>{title_right}</th><th></th></tr></thead>"

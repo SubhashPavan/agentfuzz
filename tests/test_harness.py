@@ -42,9 +42,9 @@ def test_cost_spiral_tags_infinite_loop() -> None:
             state["call_tool"]("lookup", order_id="x")
         return {**state, "answer": "done", "token_usage": 100}
 
-    wrapped = CallableAdapter(
-        tools={"lookup": lambda order_id: {"ok": True, "id": order_id}}
-    ).wrap(loopy)
+    wrapped = CallableAdapter(tools={"lookup": lambda order_id: {"ok": True, "id": order_id}}).wrap(
+        loopy
+    )
     harness = Harness(wrapped, scenarios=[{"prompt": "p"}])
     harness.add(faults.CostSpiral(max_tokens=10_000, max_repeated_calls=5))
     result = harness.run(iterations=3)

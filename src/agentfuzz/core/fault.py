@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from abc import ABC
 from dataclasses import dataclass
 from enum import Enum
 from typing import Any
@@ -35,7 +34,7 @@ class FaultDecision:
         return cls(FaultOutcome.PASSTHROUGH)
 
 
-class Fault(ABC):
+class Fault:
     """Base class for a fault injector.
 
     A fault is a small, focused thing that may:
@@ -46,7 +45,7 @@ class Fault(ABC):
       * observe and tag the run (e.g. detect cost spirals)
 
     Subclasses override only the hooks they care about. The default
-    implementations are passthrough.
+    implementations are passthrough — this is intentional, not abstract.
     """
 
     name: str = ""
@@ -67,7 +66,9 @@ class Fault(ABC):
         """
         return FaultDecision.passthrough()
 
-    def on_tool_result(self, ctx: FaultContext, call: ToolCall, result: ToolResult) -> FaultDecision:
+    def on_tool_result(
+        self, ctx: FaultContext, call: ToolCall, result: ToolResult
+    ) -> FaultDecision:
         """Inspect or mutate a tool result after it executes.
 
         Used by faults that corrupt successful responses (malformed JSON,
