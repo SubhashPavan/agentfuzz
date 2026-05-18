@@ -6,6 +6,8 @@ All notable changes to this project are documented here. Format follows
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-05-18
+
 ### Added
 
 - **AutoGen v0.4+ adapter** (`agentfuzz[autogen]`) — `wrap_tools()` returns
@@ -104,7 +106,8 @@ All notable changes to this project are documented here. Format follows
 - **CI** — ruff lint + format check on 3.12; pytest on 3.10 / 3.11 / 3.12 /
   3.13 (Ubuntu) plus 3.12 smoke runs on Windows and macOS.
 
-[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/SubhashPavan/agentfuzz/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.4.0
 [0.3.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.3.0
 [0.2.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.2.0
 [0.1.0]: https://github.com/SubhashPavan/agentfuzz/releases/tag/v0.1.0
